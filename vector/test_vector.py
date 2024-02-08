@@ -7,6 +7,7 @@
 # - Can be multiplied by a scalar
 # - Can be compared with another vector
 # - Can be dot-multiplied with another vector
+import math
 from vector import Vector
 
 def test_init_with_tail():
@@ -18,3 +19,8 @@ def test_init_with_head_and_tail():
     v = Vector(head=(1, 1), tail=(2, 2))
     assert v.head == (1, 1)
     assert v.tail == (2, 2)
+
+
+def test_norm():
+    assert Vector((3, 4)).norm == 5.0
+    assert Vector((1, 1)).norm == math.sqrt(2)
