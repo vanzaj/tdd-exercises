@@ -10,13 +10,16 @@ class Vector:
 
     @property
     def norm(self) -> float:
-        dx = self.head[0] - self.tail[0]
-        dy = self.head[1] - self.tail[1]
+        dx, dy = self._dxdy()
         return math.sqrt(dx*dx + dy*dy)
     
     @property
     def unit(self) -> 'Vector':
+        dx, dy = self._dxdy()
+        return Vector((dx/self.norm, dy/self.norm))
+    
+    def _dxdy(self):
         dx = self.head[0] - self.tail[0]
         dy = self.head[1] - self.tail[1]
-        return Vector((dx/self.norm, dy/self.norm))
+        return dx, dy
     
