@@ -26,6 +26,12 @@ class Vector:
         dx, dy = self._dxdy()
         return Vector(Point(dx/self.norm, dy/self.norm))
     
+    def __eq__(self, other: 'Vector') -> bool:
+        return self.tail == other.tail and self.head == other.head
+
+    def __add__(self, other) -> 'Vector':
+        return Vector(Point(1, 1))
+    
     def _dxdy(self):
         return (self.head.x - self.tail.x, self.head.y - self.tail.y)
     

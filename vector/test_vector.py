@@ -34,3 +34,9 @@ def test_norm():
 def test_unit_vector():
     u = Vector(_P(1, 1)).unit
     assert almost_equal(u.norm, 1.0)
+
+
+def test_add_two_vectors_at_origin():
+    v1 = Vector(_P(1, 0))
+    v2 = Vector(_P(0, 1))
+    assert v1 + v2 == Vector(_P(1, 1))
