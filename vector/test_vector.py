@@ -8,27 +8,29 @@
 # - Can be compared with another vector
 # - Can be dot-multiplied with another vector
 import math
-from vector import Vector, Number
+from vector import Vector, Number, Point
+
+_P = Point
 
 def almost_equal(a: Number, b: Number) -> bool:
     return abs(a - b) < 1e-6
 
 def test_init_with_tail():
-    v = Vector((1, 1))
-    assert v.head == (0, 0)
-    assert v.tail == (1, 1)
+    v = Vector(_P(1, 1))
+    assert v.head == _P(0, 0)
+    assert v.tail == _P(1, 1)
 
 def test_init_with_head_and_tail():
-    v = Vector(head=(1, 1), tail=(2, 2))
-    assert v.head == (1, 1)
-    assert v.tail == (2, 2)
+    v = Vector(head=_P(1, 1), tail=_P(2, 2))
+    assert v.head == _P(1, 1)
+    assert v.tail == _P(2, 2)
 
 
 def test_norm():
-    assert Vector((3, 4)).norm == 5.0
-    assert almost_equal(Vector((1, 1)).norm, math.sqrt(2))
+    assert Vector(_P(3, 4)).norm == 5.0
+    assert almost_equal(Vector(_P(1, 1)).norm, math.sqrt(2))
 
 
 def test_unit_vector():
-    u = Vector((1, 1)).unit
+    u = Vector(_P(1, 1)).unit
     assert almost_equal(u.norm, 1.0)

@@ -1,12 +1,20 @@
 import math
+from dataclasses import dataclass
 from typing import Union
 
 Number = Union[int, float]
 
+@dataclass
+class Point:
+    x: Number
+    y: Number
+
+
 class Vector:
-    def __init__(self, tail: tuple, head: tuple=(0, 0)) -> None:
+    def __init__(self, tail: Point, head: Point=Point(0, 0)) -> None:
         self.head = head
         self.tail = tail
+
 
     @property
     def norm(self) -> float:
@@ -16,10 +24,8 @@ class Vector:
     @property
     def unit(self) -> 'Vector':
         dx, dy = self._dxdy()
-        return Vector((dx/self.norm, dy/self.norm))
+        return Vector(Point(dx/self.norm, dy/self.norm))
     
     def _dxdy(self):
-        dx = self.head[0] - self.tail[0]
-        dy = self.head[1] - self.tail[1]
-        return dx, dy
+        return (self.head.x - self.tail.x, self.head.y - self.tail.y)
     
