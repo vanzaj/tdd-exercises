@@ -1,7 +1,7 @@
 # Implement a vector class representing a Euclidean vector in 2D.
 # It needs to support the following:
 # - [x] Can be instantiated with 1 or 2 (initial/tail, terminal/head) points. If 1 point the other (initial point) defaults to (0,0).
-# - Can return vector norm/length/magnitude and unit vector.
+# - [x] Can return vector norm/length/magnitude and unit vector.
 # - Can add two vectors
 # - Can subtract two vectors
 # - Can be multiplied by a scalar
@@ -24,3 +24,8 @@ def test_init_with_head_and_tail():
 def test_norm():
     assert Vector((3, 4)).norm == 5.0
     assert Vector((1, 1)).norm == math.sqrt(2)
+
+
+def test_unit_vector():
+    u = Vector((1, 1)).unit
+    assert abs(u.norm - 1.0) < 1e-6

@@ -10,3 +10,10 @@ class Vector:
         dx = self.head[0] - self.tail[0]
         dy = self.head[1] - self.tail[1]
         return math.sqrt(dx*dx + dy*dy)
+    
+    @property
+    def unit(self) -> 'Vector':
+        dx = self.head[0] - self.tail[0]
+        dy = self.head[1] - self.tail[1]
+        return Vector((dx/self.norm, dy/self.norm))
+    
