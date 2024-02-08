@@ -8,7 +8,10 @@
 # - Can be compared with another vector
 # - Can be dot-multiplied with another vector
 import math
-from vector import Vector
+from vector import Vector, Number
+
+def almost_equal(a: Number, b: Number) -> bool:
+    return abs(a - b) < 1e-6
 
 def test_init_with_tail():
     v = Vector((1, 1))
@@ -23,9 +26,9 @@ def test_init_with_head_and_tail():
 
 def test_norm():
     assert Vector((3, 4)).norm == 5.0
-    assert Vector((1, 1)).norm == math.sqrt(2)
+    assert almost_equal(Vector((1, 1)).norm, math.sqrt(2))
 
 
 def test_unit_vector():
     u = Vector((1, 1)).unit
-    assert abs(u.norm - 1.0) < 1e-6
+    assert almost_equal(u.norm, 1.0)

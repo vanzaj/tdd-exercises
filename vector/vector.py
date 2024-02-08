@@ -1,4 +1,7 @@
 import math
+from typing import Union
+
+Number = Union[int, float]
 
 class Vector:
     def __init__(self, tail: tuple, head: tuple=(0, 0)) -> None:
