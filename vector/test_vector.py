@@ -17,8 +17,8 @@ def almost_equal(a: Number, b: Number) -> bool:
 
 def test_init_with_tail():
     v = Vector(_P(1, 1))
-    assert v.head == _P(0, 0)
-    assert v.tail == _P(1, 1)
+    assert v.head == _P(1, 1)
+    assert v.tail == _P(0, 0)
 
 def test_init_with_head_and_tail():
     v = Vector(head=_P(1, 1), tail=_P(2, 2))

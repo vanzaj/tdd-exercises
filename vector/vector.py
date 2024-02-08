@@ -11,7 +11,7 @@ class Point:
 
 
 class Vector:
-    def __init__(self, tail: Point, head: Point=Point(0, 0)) -> None:
+    def __init__(self, head: Point, tail: Point=Point(0, 0)) -> None:
         self.head = head
         self.tail = tail
 
