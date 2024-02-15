@@ -32,5 +32,17 @@ def test_fizzbuzz_for_fizz_and_buzz(number, expected):
     assert fizzbuzz(number) == expected
 
 def test_printing_fizzbuzz():
-    expected = "1,2,Fizz"
-    assert fizzbuzz_print(3) == expected
+    expected = "1,2,Fizz,4,Buzz"
+    assert fizzbuzz_print(5) == expected
+
+
+def test_fizzbuzz_with_divisor_args():
+    assert fizzbuzz(2, {"Fizz": 2}) == "Fizz"
+    assert fizzbuzz(3, {"Fizz": 2}) == "3"
+    assert fizzbuzz(7, {"Fizz": 2, "Foo": 7}) == "Foo"
+
+
+def test_py_dict_to_list():
+    d = {"a": 1, "b": 5, "c": 3}
+    lst = sorted(list(d.items()), key=lambda x:x[1], reverse=True)
+    assert lst == [('b', 5), ('c', 3), ('a', 1)]
