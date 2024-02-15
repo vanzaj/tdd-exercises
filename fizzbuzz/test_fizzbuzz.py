@@ -13,3 +13,11 @@ from fizzbuzz import fizzbuzz
 
 def test_sanity():
     assert isinstance(fizzbuzz, object)
+
+
+def test_fizzbuzz_for_one():
+    assert fizzbuzz(1) == "1"
+
+
+def test_fizzbuzz_for_two():
+    assert fizzbuzz(2) == "2"
