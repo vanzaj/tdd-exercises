@@ -12,6 +12,7 @@
 import pytest
 from fizzbuzz import fizzbuzz
 
+
 @pytest.mark.parametrize("number, expected", [
     (1, "1"),
     (2, "2"),
