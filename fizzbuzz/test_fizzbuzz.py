@@ -8,7 +8,7 @@
 
 # unittest or pytest? pytest
 import pytest
-from fizzbuzz import fizzbuzz
+from fizzbuzz import fizzbuzz, fizzbuzz_print
 
 @pytest.mark.parametrize("number, expected", [
     (1, "1"),
@@ -30,3 +30,7 @@ def test_fizzbuzz_for_normal_numbers(number, expected):
 ])
 def test_fizzbuzz_for_fizz_and_buzz(number, expected):
     assert fizzbuzz(number) == expected
+
+def test_printing_fizzbuzz():
+    expected = "1,2,Fizz"
+    assert fizzbuzz_print(3) == expected
