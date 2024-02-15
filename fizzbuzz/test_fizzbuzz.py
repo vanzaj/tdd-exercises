@@ -7,17 +7,26 @@
 # pass any number of divisor arguments: FizzBuzzExtended(100, {"fizz": 3, "buzz": 4, "foo": 8, "bar": 9})
 
 # unittest or pytest? pytest
-
-
+import pytest
 from fizzbuzz import fizzbuzz
 
-def test_sanity():
-    assert isinstance(fizzbuzz, object)
+@pytest.mark.parametrize("number, expected", [
+    (1, "1"),
+    (2, "2"),
+    (4, "4"),
+    (7, "7"),
+])
+def test_fizzbuzz_for_normal_numbers(number, expected):
+    assert fizzbuzz(number) == expected
 
 
-def test_fizzbuzz_for_one():
-    assert fizzbuzz(1) == "1"
-
-
-def test_fizzbuzz_for_two():
-    assert fizzbuzz(2) == "2"
+@pytest.mark.parametrize("number, expected", [
+    (3, "Fizz"),
+    (6, "Fizz"),
+    (9, "Fizz"),
+    (5, "Buzz"),
+    (10, "Buzz"),
+    (15, "FizzBuzz"),
+])
+def test_fizzbuzz_for_fizz_and_buzz(number, expected):
+    assert fizzbuzz(number) == expected
