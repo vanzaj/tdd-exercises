@@ -10,33 +10,33 @@
 import math
 from vector import Vector, Number, Point
 
-_P = Point
+P_ = Point
 
 def almost_equal(a: Number, b: Number) -> bool:
     return abs(a - b) < 1e-6
 
 def test_init_with_tail():
-    v = Vector(_P(1, 1))
-    assert v.head == _P(1, 1)
-    assert v.tail == _P(0, 0)
+    v = Vector(P_(1, 1))
+    assert v.head == P_(1, 1)
+    assert v.tail == P_(0, 0)
 
 def test_init_with_head_and_tail():
-    v = Vector(head=_P(1, 1), tail=_P(2, 2))
-    assert v.head == _P(1, 1)
-    assert v.tail == _P(2, 2)
+    v = Vector(head=P_(1, 1), tail=P_(2, 2))
+    assert v.head == P_(1, 1)
+    assert v.tail == P_(2, 2)
 
 
 def test_norm():
-    assert Vector(_P(3, 4)).norm == 5.0
-    assert almost_equal(Vector(_P(1, 1)).norm, math.sqrt(2))
+    assert Vector(P_(3, 4)).norm == 5.0
+    assert almost_equal(Vector(P_(1, 1)).norm, math.sqrt(2))
 
 
 def test_unit_vector():
-    u = Vector(_P(1, 1)).unit
+    u = Vector(P_(1, 1)).unit
     assert almost_equal(u.norm, 1.0)
 
 
 def test_add_two_vectors_at_origin():
-    v1 = Vector(_P(1, 0))
-    v2 = Vector(_P(0, 1))
-    assert v1 + v2 == Vector(_P(1, 1))
+    v1 = Vector(P_(1, 0))
+    v2 = Vector(P_(0, 1))
+    assert v1 + v2 == Vector(P_(1, 1))
