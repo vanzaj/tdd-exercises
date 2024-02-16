@@ -26,12 +26,26 @@ class Vector:
         dx, dy = self._dxdy()
         return Vector(Point(dx/self.norm, dy/self.norm))
     
+    
+    def translate(self, dx, dy) -> 'Vector':
+        head = Point(self.head.x + dx, self.head.y + dy)
+        tail = Point(self.tail.x + dx, self.tail.y + dy)
+        return Vector(head, tail)
+    
+
     def __eq__(self, other: 'Vector') -> bool:
         return self.tail == other.tail and self.head == other.head
 
-    def __add__(self, other) -> 'Vector':
-        return Vector(Point(1, 1))
+    def __add__(self, other: 'Vector') -> 'Vector':
+        self_tr = self.translate(-self.tail.x, -self.tail.y)
+        other_tr = other.translate(-other.tail.x, -other.tail.y)
+        vector_sum = Vector(Point(self_tr.head.x + other_tr.head.x, self_tr.head.y + other_tr.head.y))
+        return vector_sum.translate(self.tail.x, self.tail.y)
     
     def _dxdy(self):
         return (self.head.x - self.tail.x, self.head.y - self.tail.y)
+    
+
+    def __repr__(self):
+        return f"Vector({self.head}, {self.tail})"
     

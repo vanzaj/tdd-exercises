@@ -40,3 +40,15 @@ def test_add_two_vectors_at_origin():
     v1 = Vector(P_(1, 0))
     v2 = Vector(P_(0, 1))
     assert v1 + v2 == Vector(P_(1, 1))
+
+
+def test_translate_vector():
+    v = Vector(P_(1, 1)).translate(1, 0)
+    assert v.tail == P_(1, 0)
+    assert v.head == P_(2, 1)
+
+
+def test_add_two_vectors_not_at_origin():
+    v1 = Vector(P_(2, 0), P_(1, 0))
+    v2 = Vector(P_(0, 1))
+    assert v1 + v2 == Vector(P_(2, 1), P_(1, 0))
