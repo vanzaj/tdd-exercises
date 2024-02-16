@@ -30,15 +30,18 @@ class Vector:
         tail = Point(self.tail.x + dx, self.tail.y + dy)
         return Vector(head, tail)
 
+    def bring_to_origin(self) -> 'Vector':
+        return self.translate(-self.tail.x, -self.tail.y)
+
     def __eq__(self, other: 'Vector') -> bool:
-        self0 = self.translate(-self.tail.x, -self.tail.y)
-        other0 = other.translate(-other.tail.x, -other.tail.y)
+        self0 = self.bring_to_origin()
+        other0 = other.bring_to_origin()
         return self0.tail == other0.tail and self0.head == other0.head
 
     def __add__(self, other: 'Vector') -> 'Vector':
-        self_tr = self.translate(-self.tail.x, -self.tail.y)
-        other_tr = other.translate(-other.tail.x, -other.tail.y)
-        vector_sum = Vector(Point(self_tr.head.x + other_tr.head.x, self_tr.head.y + other_tr.head.y))
+        self0 = self.bring_to_origin()
+        other0 = other.bring_to_origin()
+        vector_sum = Vector(Point(self0.head.x + other0.head.x, self0.head.y + other0.head.y))
         return vector_sum.translate(self.tail.x, self.tail.y)
     
     def _dxdy(self):

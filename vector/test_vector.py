@@ -11,7 +11,7 @@
 import math
 from vector import Vector, Number, Point
 
-P_ = Point
+P_ = Point  # alias
 
 
 def almost_equal(a: Number, b: Number) -> bool:
