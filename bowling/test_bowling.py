@@ -11,7 +11,11 @@ def test_new_bowling_game(game):
     assert isinstance(game, object)
 
 
-def test_rolls(game):
+def test_simple_rolls(game):
     game.rolls([1, 2])
     assert game._rolls == [1, 2]
     assert game.score() == 3
+
+def test_rolls_with_spare(game):
+    game.rolls([9, 1, 2])
+    assert game.score() == 12
