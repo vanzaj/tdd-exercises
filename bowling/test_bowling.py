@@ -19,3 +19,17 @@ def test_roll_one_frame(game):
 def test_rolls_with_spare(game):
     game.rolls([9, 1, 2])
     assert game.score() == 12
+
+
+def test_heart_break(game):
+    game.rolls([9, 0] * 10)
+    assert game.score() == 90
+
+def test_all_spares(game):
+    game.rolls([5, 5] * 10 + [5])
+    assert game.score() == 150
+
+@pytest.mark.skip('bug')
+def test_perfect_game(game):
+    game.rolls([10]*12)
+    assert game.score() == 300

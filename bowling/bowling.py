@@ -19,7 +19,8 @@ class BowlingGame:
                 frame.append(pins)
                 continue
             if self.is_strike(frame):
-                frame.append([self._rolls[idx+1:idx+3]])
+                frame.extend(self._rolls[idx+1:idx+3])
+                print(idx, frame)
                 total += self.frame_score(frame)
                 frame = []
                 continue
