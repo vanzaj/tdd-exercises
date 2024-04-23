@@ -33,3 +33,4 @@ def test_all_spares(game):
 def test_perfect_game(game):
     game.rolls([10]*12)
     assert game.score() == 300
+

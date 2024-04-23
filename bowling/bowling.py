@@ -33,3 +33,4 @@ class BowlingGame:
             total += self.frame_score(frame)
             frame = []
         return total
+
