@@ -1,20 +1,31 @@
 import math
 
-def calculate_amount(perf, play):
+def is_comedy(play):
+    return play["type"] == "comedy"
+
+
+def amount_for(perf, play):
+    result = 0
     if play["type"] == "tragedy":
-        this_amount = 40000
+        result = 40000
         if perf["audience"] > 30:
-            this_amount += 1000 * (perf["audience"] - 30)
-    elif play["type"] == "comedy":
-        this_amount = 30000
+            result += 1000 * (perf["audience"] - 30)
+    elif is_comedy(play):
+        result = 30000
         if perf["audience"] > 20:
-            this_amount += 10000 + 500 * (perf["audience"] - 20)
-
-        this_amount += 300 * perf["audience"]
-
+            result += 10000 + 500 * (perf["audience"] - 20)
+        result += 300 * perf["audience"]
     else:
         raise ValueError(f'unknown type: {play["type"]}')
-    return this_amount
+    return result
+
+
+def calculate_volume_credits(nb_pax, is_comedy=False):
+    if is_comedy :
+        volume_credits = math.floor(nb_pax / 5)
+    else:
+        volume_credits = 0
+    return volume_credits + max(nb_pax - 30, 0)
 
 
 def statement(invoice, plays):
@@ -22,21 +33,21 @@ def statement(invoice, plays):
     volume_credits = 0
     result = f'Statement for {invoice["customer"]}\n'
 
-    def format_as_dollars(amount):
-        return f"${amount:0,.2f}"
+    def format_as_dollars(cents):
+        return f"${cents/100:0,.2f}"
 
     for perf in invoice["performances"]:
         play = plays[perf["playID"]]
-        this_amount = calculate_amount(perf, play)
-
-        volume_credits += max(perf["audience"] - 30, 0)
-        if "comedy" == play["type"]:
-            volume_credits += math.floor(perf["audience"] / 5)
-
-        result += f' {play["name"]}: {format_as_dollars(this_amount/100)} ({perf["audience"]} seats)\n'
+        this_amount = amount_for(perf, play)
         total_amount += this_amount
+        result += f' {play["name"]}: {format_as_dollars(this_amount)} ({perf["audience"]} seats)\n'
+        
+        nb_pax = perf["audience"]
+        volume_credits += calculate_volume_credits(nb_pax, is_comedy(play))
 
-    result += f"Amount owed is {format_as_dollars(total_amount/100)}\n"
+
+    result += f"Amount owed is {format_as_dollars(total_amount)}\n"
     result += f"You earned {volume_credits} credits\n"
     return result
+
 
