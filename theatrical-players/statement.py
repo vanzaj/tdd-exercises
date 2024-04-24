@@ -3,7 +3,7 @@ import math
 
 
 def statement(invoice, plays):
-    def format_as_dollars(cents):
+    def usd(cents):
         return f"${cents/100:0,.2f}"
 
 
@@ -11,12 +11,13 @@ def statement(invoice, plays):
         return play["type"] == "comedy"
 
 
-    def playFor(aPerformance):
+    def play_for(aPerformance):
         return plays[aPerformance["playID"]]
+
 
     def amount_for(aPerformance):
         result = 0
-        play = playFor(aPerformance)
+        play = play_for(aPerformance)
         if play["type"] == "tragedy":
             result = 40000
             if aPerformance["audience"] > 30:
@@ -31,29 +32,27 @@ def statement(invoice, plays):
         return result
 
 
-    def calculate_volume_credits(nb_pax, is_comedy=False):
-        if is_comedy :
-            volume_credits = math.floor(nb_pax / 5)
-        else:
-            volume_credits = 0
-        return volume_credits + max(nb_pax - 30, 0)
+    def volume_credits_for(nb_pax, is_comedy=False):
+        result = math.floor(nb_pax / 5) if is_comedy else 0
+        return result + max(nb_pax - 30, 0)
+
 
     total_amount = 0
     volume_credits = 0
     result = f'Statement for {invoice["customer"]}\n'
 
     for perf in invoice["performances"]:
-        play = playFor(perf)
+        play = play_for(perf)
         this_amount = amount_for(perf)
         total_amount += this_amount
 
-        result += f' {play["name"]}: {format_as_dollars(this_amount)} ({perf["audience"]} seats)\n'
+        result += f' {play["name"]}: {usd(this_amount)} ({perf["audience"]} seats)\n'
         
         nb_pax = perf["audience"]
-        volume_credits += calculate_volume_credits(nb_pax, is_comedy(play))
+        volume_credits += volume_credits_for(nb_pax, is_comedy(play))
 
 
-    result += f"Amount owed is {format_as_dollars(total_amount)}\n"
+    result += f"Amount owed is {usd(total_amount)}\n"
     result += f"You earned {volume_credits} credits\n"
     return result
 
