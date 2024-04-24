@@ -11,8 +11,12 @@ def statement(invoice, plays):
         return play["type"] == "comedy"
 
 
-    def amount_for(aPerformance, play):
+    def playFor(aPerformance):
+        return plays[aPerformance["playID"]]
+
+    def amount_for(aPerformance):
         result = 0
+        play = playFor(aPerformance)
         if play["type"] == "tragedy":
             result = 40000
             if aPerformance["audience"] > 30:
@@ -39,9 +43,10 @@ def statement(invoice, plays):
     result = f'Statement for {invoice["customer"]}\n'
 
     for perf in invoice["performances"]:
-        play = plays[perf["playID"]]
-        this_amount = amount_for(perf, play)
+        play = playFor(perf)
+        this_amount = amount_for(perf)
         total_amount += this_amount
+
         result += f' {play["name"]}: {format_as_dollars(this_amount)} ({perf["audience"]} seats)\n'
         
         nb_pax = perf["audience"]
