@@ -37,23 +37,27 @@ def statement(invoice, plays):
         return result + max(nb_pax - 30, 0)
 
 
-    total_amount = 0
-    volume_credits = 0
+    def total_volume_credits():
+        result = 0
+        for perf in invoice["performances"]:
+            nb_pax = perf["audience"]
+            result += volume_credits_for(nb_pax, is_comedy(play_for(perf)))
+        return result
+
+    def total_amount():
+        result = 0
+        for perf in invoice["performances"]:
+            result += amount_for(perf)
+        return result
+
+
     result = f'Statement for {invoice["customer"]}\n'
-
     for perf in invoice["performances"]:
-        play = play_for(perf)
-        this_amount = amount_for(perf)
-        total_amount += this_amount
-
-        result += f' {play["name"]}: {usd(this_amount)} ({perf["audience"]} seats)\n'
-        
-        nb_pax = perf["audience"]
-        volume_credits += volume_credits_for(nb_pax, is_comedy(play))
+        result += f' {play_for(perf)["name"]}: {usd(amount_for(perf))} ({perf["audience"]} seats)\n'
 
 
-    result += f"Amount owed is {usd(total_amount)}\n"
-    result += f"You earned {volume_credits} credits\n"
+    result += f"Amount owed is {usd(total_amount())}\n"
+    result += f"You earned {total_volume_credits()} credits\n"
     return result
 
 
