@@ -4,11 +4,11 @@ from statement import statement
 
 @pytest.fixture
 def plays():
-    return [
-        {"type": "tragedy", "name": "Hamlet"},
-        {"type": "comedy", "name": "Lord of Pies"},
-        {"type": "neither", "name": "FooBar"},
-    ]
+    return {
+        "hamlet": {"type": "tragedy", "name": "Hamlet"},
+        "pies": {"type": "comedy", "name": "Lord of Pies"},
+        "foobar": {"type": "neither", "name": "FooBar"},
+    }
 
 
 @pytest.fixture
@@ -23,7 +23,7 @@ def invoice():
 
 
 def test_statement_tradegy_10pax(invoice, plays):
-    inv = invoice(0, 10)
+    inv = invoice("hamlet", 10)
     assert (
         statement(inv, plays)
         == """Statement for BigCo
@@ -35,7 +35,7 @@ You earned 0 credits
 
 
 def test_statement_tradegy_31pax(invoice, plays):
-    inv = invoice(0, 31)
+    inv = invoice("hamlet", 31)
     assert (
         statement(inv, plays)
         == """Statement for BigCo
@@ -47,7 +47,7 @@ You earned 1 credits
 
 
 def test_statement_comedy_1pax(invoice, plays):
-    inv = invoice(1, 1)
+    inv = invoice("pies", 1)
     assert (
         statement(inv, plays)
         == """Statement for BigCo
@@ -59,7 +59,7 @@ You earned 0 credits
 
 
 def test_statement_comedy_21pax(invoice, plays):
-    inv = invoice(1, 21)
+    inv = invoice("pies", 21)
     assert (
         statement(inv, plays)
         == """Statement for BigCo
@@ -71,7 +71,6 @@ You earned 4 credits
 
 
 def test_statement_unknown_type(invoice, plays):
-    inv = invoice(2, 1)
+    inv = invoice("foobar", 1)
     with pytest.raises(ValueError):
         x = statement(inv, plays)
-
