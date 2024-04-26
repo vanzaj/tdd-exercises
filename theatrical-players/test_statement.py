@@ -22,26 +22,30 @@ def invoice():
     return _make_invoice
 
 
-def test_statement_tradegy_10pax(invoice, plays):
-    inv = invoice("hamlet", 10)
+def test_statement_for_two_plays(invoice, plays):
+    inv = invoice("hamlet", 1)
+    inv["performances"].append({"playID": "pies", "audience": 1})
     assert (
         statement(inv, plays)
         == """Statement for BigCo
- Hamlet: $400.00 (10 seats)
-Amount owed is $400.00
+ Hamlet: $400.00 (1 seats)
+ Lord of Pies: $303.00 (1 seats)
+Amount owed is $703.00
 You earned 0 credits
 """
     )
 
 
-def test_statement_tradegy_31pax(invoice, plays):
+def test_statement_for_two_plays_with_many_attendies(invoice, plays):
     inv = invoice("hamlet", 31)
+    inv["performances"].append({"playID": "pies", "audience": 31})
     assert (
         statement(inv, plays)
         == """Statement for BigCo
  Hamlet: $410.00 (31 seats)
-Amount owed is $410.00
-You earned 1 credits
+ Lord of Pies: $548.00 (31 seats)
+Amount owed is $958.00
+You earned 8 credits
 """
     )
 
