@@ -10,3 +10,8 @@ def test_raises_exception():
     with pytest.raises(ValueError) as ex:
         is_valid_email("name-at-example.com")
     assert "not valid" in str(ex.value)
+
+
+def test_parametrized_fixture(user_factory):
+    user = user_factory("John")
+    assert user.name == "John"

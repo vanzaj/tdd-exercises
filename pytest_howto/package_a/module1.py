@@ -11,3 +11,8 @@ def is_valid_email(email: str) -> bool | ValueError:
     if "@" not in email:
         raise ValueError(f"{email} is not valid")
     return True
+
+
+class User:
+    def __init__(self, name: str):
+        self.name = name
