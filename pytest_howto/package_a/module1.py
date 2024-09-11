@@ -8,6 +8,10 @@ def func_zero():
     return 0
 
 
+def say_hello():
+    print("Hello World")
+
+
 def is_valid_email(email: str) -> bool | ValueError:
     logging.info(f"validating {email}")
     if "@" not in email:
