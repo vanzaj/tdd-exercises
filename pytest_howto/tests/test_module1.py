@@ -30,3 +30,8 @@ def test_capture_stdout(capsys):
 def test_parametrized_fixture(user_factory):
     user = user_factory("John")
     assert user.name == "John"
+
+
+@pytest.mark.parametrize("name", ["John", "Bob"])
+def test_make_user_fixture(make_user, name):
+    assert make_user.name == name

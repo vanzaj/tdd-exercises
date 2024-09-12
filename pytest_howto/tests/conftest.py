@@ -15,3 +15,8 @@ def user_factory():
         return User(name)
 
     return create_user
+
+
+@pytest.fixture()
+def make_user(name):
+    return User(name)
