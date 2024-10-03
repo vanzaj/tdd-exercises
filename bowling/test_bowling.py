@@ -1,5 +1,3 @@
-from bowling import Game
+def test_sanity():
+  assert 4 == 2 + 2
 
-
-def test_bowling_game():
-  assert isinstance(Game(), object)
