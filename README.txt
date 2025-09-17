@@ -6,10 +6,10 @@
 ## Setup
 
 ```
-# step 0: install pyenv if not present
+# step 0: install `uv`
 # step 1: clone the repo
-python -m venv venv
-. venv/bin/activate
-pip install -r requirements.txt
+
+uv add -r requirements.txt
+uv run pytest fizzbuzz
 ```
 
