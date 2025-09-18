@@ -4,7 +4,13 @@ from package_a.module1 import func_zero, say_hello, is_valid_email
 
 
 def test_func_zero(fake_setup_and_teardown):
+    # autoload fixtures from conftest.py
     assert func_zero() == 0
+
+
+def test_float_almost_equal():
+    x = 1.1
+    assert pytest.approx(x * x) == 1.21
 
 
 def test_raises_exception():

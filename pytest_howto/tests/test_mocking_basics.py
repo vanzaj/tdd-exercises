@@ -12,6 +12,7 @@ from mocking.basics import Dice, Person
 
 
 def test_hardcoded_randint(mocker):
+    # mocker fixture is from pytest-mock
     mocker.patch("random.randint", return_value=1)
     dice = Dice()
     assert dice.roll() == 1
