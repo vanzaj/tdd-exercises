@@ -52,5 +52,16 @@ livingroom: James, Bob
 garden: Clare
 bedroom: Sue
 
+# Troll Treasure
 
 
+A *dungeon* is a network of connected *rooms* on a square grid. One or more rooms contain *treasure*. Your character, the *adventurer*, moves between rooms, looking for the treasure. A *troll* is also in the dungeon and moves between rooms. If the troll catches the adventurer, you lose. If you find treasure before being eaten, you win. (In this simple version, we do not consider the need to leave the dungeon.)
+
+The starting rooms for the adventurer and troll are given in the definition of the dungeon.
+
+The way the adventurer and troll move is called a *strategy*. Different strategies are more or less likely to succeed. There are two strategies in the provided code - random movement, and movement controlled by human input.
+
+
+Source: [Troll treasure exercise](https://alan-turing-institute.github.io/rse-course/html/module06_software_projects/06_09_exercise.html).
+
+Original game: [Hunt the Wumpus](https://en.wikipedia.org/wiki/Hunt_the_Wumpus)).

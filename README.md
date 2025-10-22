@@ -10,3 +10,10 @@ uv add -r requirements.txt
 uv run pytest fizzbuzz
 ```
 
+# Where to find more katas
+
+- [CodeKata](http://codekata.com/)
+- [Kata Log](https://kata-log.rocks/)
+- [Awesome katas](https://github.com/gamontal/awesome-katas)
+- [Cyber Dojo](https://cyber-dojo.org/)
+
