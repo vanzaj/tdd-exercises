@@ -1,6 +1,7 @@
 # 24-hour clock
 
-The so called "24-hour clock" is used in navigation (sea, air), hospitals, airports and whereever a timetable is needed.
+The so called "24-hour clock" is used in sea navigation, airports, hospitals and whereever a timetable is needed.
+
 
 This kata has 2 parts:
   - 1. Humanize time and duration.
